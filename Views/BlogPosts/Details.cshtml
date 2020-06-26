@@ -1,0 +1,37 @@
+﻿  <!-- Page Header -->
+@using Falcon_Blog_2.Models
+@model BlogPost
+
+<header class="masthead" style="background-image: url('/Images/post-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="post-heading">
+                    <h1>@Model.Title</h1>
+                    <h2 class="subheading">@Model.Abstract</h2>
+                    <span class="meta">
+                        Posted by
+                        <a href="https://trevorpopham.azurewebsites.net/">Trevor Popham</a>
+                        on @Model.Created
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                @Html.Raw(Model.Body)
+                @if (Model.MediaUrl != null)
+                {
+                    <img class="img-responsive" src="@Model.MediaUrl" alt="" />
+                }
+            </div>
+        </div>
+    </div>
+</article>

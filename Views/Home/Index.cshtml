@@ -1,0 +1,64 @@
+﻿@using Falcon_Blog_2.Models
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Falcon_Blog_2.Models.BlogPost>
+
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('/Images/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1>Trevor's Blog</h1>
+                    <span class="subheading">An Internet Diary of the inner workings of my mind</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+
+
+            @foreach (var post in Model)
+            {
+                <div class="post-preview">
+
+                    <a href="@Url.Action("Details", "BlogPosts", new { Slug = post.Slug})">
+                        <h2 class="post-title">
+                            @post.Title
+                        </h2>
+                        <h3 class="post-subtitle">
+                            @post.Abstract
+                        </h3>
+                    </a>
+                    <p class="post-meta">
+                        Posted by
+                        <a href="https://trevorpopham.azurewebsites.net/">Trevor Popham</a>
+                        on @post.Created.ToString("MMM dd, yyyy")
+
+
+                    </p>
+                </div>
+                <hr>
+            }
+
+
+
+
+
+            <!-- Pager -->
+            <div class="clearfix">
+                        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                @*<a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>*@
+            </div>
+        </div>
+    </div>
+</div>
